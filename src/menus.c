@@ -58,6 +58,7 @@ s8 D_8018EE0A;
 s8 gCupCourseSelection;
 s8 D_8018EE0C;
 struct_8018EE10_entry D_8018EE10[2];
+u8 gCharactersUnlocked;
 
 /** Data **/
 s32 gMenuSelection = LOGO_INTRO_MENU;
@@ -1487,15 +1488,9 @@ void main_menu_act(struct Controller *controller, u16 arg1) {
 GLOBAL_ASM("asm/non_matchings/menus/main_menu_act.s")
 #endif
 
-// check if there is no currently selected and/or hovered character at grid position `gridId`
+// check if character bit is set in gCharactersUnlocked
 s32 is_character_spot_free(s32 gridId) {
-    s32 i;
-    for (i = 0; i < ARRAY_COUNT(gCharacterGridSelections); i++) {
-        if (gridId == gCharacterGridSelections[i]) {
-            return FALSE;
-        }
-    }
-    return TRUE;
+    return (((1 << (gridId - 1)) & gCharactersUnlocked) != 0);
 }
 
 #ifdef NON_MATCHING
