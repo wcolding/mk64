@@ -21,15 +21,24 @@ def format_line(name: str, type: str, display: str, line: str):
     global watchlist_data
     watchlist_data.append(formatted)
 
+
+
 for line in lines:
-    if 'gItemsUnlocked' in line:
+    def symbol_found(name: str):
+        return f' {name}\n' in line
+
+    if symbol_found('gItemsUnlocked'):
         format_line('gItemsUnlocked', 'w', 'h', line)
     
-    if 'gItemsArray' in line:
+    if symbol_found('gItemsArray'):
         format_line('gItemsArray', 'd', 'h', line)
 
-    if 'gCharactersUnlocked' in line:
+    if symbol_found('gCharactersUnlocked'):
         format_line('gCharactersUnlocked', 'b', 'b', line)
+    
+    if symbol_found('gMenuSelection'):
+        format_line('gMenuSelection', 'd', 'h', line)
+        
 
 output = io.open('build/us/mk64 modded.wch', 'w')
 for line in watchlist_data:
