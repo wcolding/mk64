@@ -2,6 +2,7 @@
 #define LIMITED_ITEMS_H
 
 #include "math_util.h"
+#include "common_structs.h"
 
 struct itemsList 
 {
@@ -10,9 +11,9 @@ struct itemsList
 };
 
 struct itemsList gItemsArray;
-u16 gItemsUnlocked = 0x7FFF;
+u16 gItemsUnlocked = 0x6FFF;
 
-void updateItemsList(void)
+void updateItemsList(u16 mask)
 {
     int i;
     int flag = 0;
@@ -26,7 +27,7 @@ void updateItemsList(void)
     for (i = 0; i < 15; i++)
     {
         flag = (1 << i);
-        if ((gItemsUnlocked & flag) != 0) 
+        if ((mask & flag) != 0) 
         {
             gItemsArray.items[gItemsArray.length] = i + 1;
             gItemsArray.length++;
@@ -40,14 +41,24 @@ s32 getRandomItem(void)
     return random;
 }
 
-s32 getLimitedItem(void) {
+s32 getLimitedItem(Player *p) {
     u16 random;
+    u16 adjustedItems = gItemsUnlocked;
+    
+    // If player is in first, limit items further
+    if (p->currentRank == 0) {
+        adjustedItems = 0x0001; // bananas only
+    }
+    else if (p->currentRank < 4) {
+        adjustedItems |= 0x04C0;
+        adjustedItems ^= 0x04C0; // no lightning, blue shells or boo above 4th
+    }
 
-    if (gItemsUnlocked == 0) {
+    if (adjustedItems == 0) {
         return 0;
     }
 
-    updateItemsList();
+    updateItemsList(adjustedItems);
     random = random_int(gItemsArray.length);
     return gItemsArray.items[random];
 

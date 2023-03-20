@@ -3374,7 +3374,7 @@ void func_802A0450(Player *player, struct Actor *actor) {
             actor->state = 3;
             actor->flags = -0x8000;
             actor->unk_04 = 0;
-            itemToGive = getLimitedItem();
+            itemToGive = getLimitedItem(player);
             if (itemToGive > 0) {
                 if (player->unk_000 & 0x4000) {
                     func_8007ABFC(player - gPlayerOne, itemToGive);
@@ -3390,7 +3390,7 @@ void func_802A0450(Player *player, struct Actor *actor) {
             actor->state = 3;
             actor->flags = -0x8000;
             actor->unk_04 = 0;
-            itemToGive = getLimitedItem();
+            itemToGive = getLimitedItem(player);
             if (itemToGive > 0) {
                 if (player->unk_000 & 0x4000) {
                     func_8007ABFC(player - gPlayerOne, itemToGive);
