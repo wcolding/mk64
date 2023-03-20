@@ -79,6 +79,5 @@ extern s8 gCupSelection;
 extern s8 gCupCourseSelection;
 extern s8 D_8018EE0C;
 extern struct_8018EE10_entry D_8018EE10[2];
-extern u8 gCharactersUnlocked;
 
 #endif /* MENUS_H */

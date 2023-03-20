@@ -19,6 +19,7 @@
 #include "code_800431B0.h"
 #include "code_8008C1D0.h"
 #include "code_80281780.h"
+#include "limited_items.h"
 
 // Declarations (not in this file)
 void func_80091B78(void);

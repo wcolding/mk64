@@ -3212,6 +3212,10 @@ void func_802A0350(struct Actor *arg0, struct Actor *arg1) {
     }
 }
 
+
+extern s32 getRandomItem(void);
+extern s32 getLimtedItem(void);
+
 void func_802A0450(Player *player, struct Actor *actor) {
     s32 stackPadding0;
     s16 temp_lo;
@@ -3221,6 +3225,7 @@ void func_802A0450(Player *player, struct Actor *actor) {
     Player *owner;
     f32 temp_f0;
     f32 temp_f2;
+    s32 itemToGive;
 
     temp_lo = player - gPlayerOne;
     switch (actor->type) {
@@ -3369,8 +3374,11 @@ void func_802A0450(Player *player, struct Actor *actor) {
             actor->state = 3;
             actor->flags = -0x8000;
             actor->unk_04 = 0;
-            if (player->unk_000 & 0x4000) {
-                func_8007ABFC(player - gPlayerOne, 7);
+            itemToGive = getLimitedItem();
+            if (itemToGive > 0) {
+                if (player->unk_000 & 0x4000) {
+                    func_8007ABFC(player - gPlayerOne, itemToGive);
+                }
             }
         } else if (actor->state == 0) {
             actor->state = 1;
@@ -3382,8 +3390,11 @@ void func_802A0450(Player *player, struct Actor *actor) {
             actor->state = 3;
             actor->flags = -0x8000;
             actor->unk_04 = 0;
-            if (player->unk_000 & 0x4000) {
-                func_8007ABFC(player - gPlayerOne, 0);
+            itemToGive = getLimitedItem();
+            if (itemToGive > 0) {
+                if (player->unk_000 & 0x4000) {
+                    func_8007ABFC(player - gPlayerOne, itemToGive);
+                }
             }
         } else if (actor->state == 0) {
             actor->state = 1;

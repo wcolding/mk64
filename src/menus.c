@@ -15,6 +15,7 @@
 #include "main.h"
 #include "staff_ghosts.h"
 #include <sounds.h>
+#include "limited_characters.h"
 
 /** Externs to be put into headers **/
 extern s16 D_8015F892; // bss unknown
@@ -58,7 +59,6 @@ s8 D_8018EE0A;
 s8 gCupCourseSelection;
 s8 D_8018EE0C;
 struct_8018EE10_entry D_8018EE10[2];
-u8 gCharactersUnlocked;
 
 /** Data **/
 s32 gMenuSelection = LOGO_INTRO_MENU;
@@ -1693,7 +1693,7 @@ void course_select_menu_act(struct Controller *arg0, u16 arg1) {
             }
 
             D_800DC540 = gCupSelection;
-            gCurrentCourseId = gCupCourseOrder[gCupSelection][gCupCourseSelection];
+            gCurrentCourseId = gCupCourseOrder[gCupSelection][gCupCourseSelection] & 0x00FF;
             if ((buttonAndStickPress & 0x4000) != 0) {
                 func_8009E208();
                 play_sound2(SOUND_MENU_GO_BACK);
@@ -1705,7 +1705,7 @@ void course_select_menu_act(struct Controller *arg0, u16 arg1) {
                 } else {
                     D_8018EDEC = 3;
                     play_sound2(SOUND_MENU_SELECT);
-                    gCurrentCourseId = gCupCourseOrder[gCupSelection][CUP_COURSE_ONE];
+                    gCurrentCourseId = gCupCourseOrder[gCupSelection][CUP_COURSE_ONE] & 0x00FF;
                     gMenuTimingCounter = 0;
                 }
                 func_800B44AC();
@@ -1724,7 +1724,7 @@ void course_select_menu_act(struct Controller *arg0, u16 arg1) {
                 play_sound2(SOUND_MENU_CURSOR_MOVE);
             }
 
-            gCurrentCourseId = gCupCourseOrder[gCupSelection][gCupCourseSelection];
+            gCurrentCourseId = gCupCourseOrder[gCupSelection][gCupCourseSelection] & 0x00FF;
             if ((buttonAndStickPress & 0x4000) != 0) {
                 if (D_8018EDEC == 2) {
                     D_8018EDEC = 1;
