@@ -35,7 +35,14 @@ for line in lines:
         format_line('gCharactersUnlocked', 'b', 'b', line)
     
     if symbol_found('gMenuSelection'):
-        format_line('gMenuSelection', 'd', 'h', line)       
+        format_line('gMenuSelection', 'd', 'h', line)   
+    
+    if symbol_found('gCupCourseOrder'):
+        format_line('gCupCourseOrder', 'd', 'h', line)   
+    
+    if symbol_found('gRandomizedCups'):
+        format_line('gRandomizedCups', 'd', 'h', line)     
+             
 
 output = io.open('build/us/mk64 modded.wch', 'w')
 for line in watchlist_data:

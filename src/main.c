@@ -1103,7 +1103,7 @@ void update_gamestate(void) {
         }
 }
 
-void thread5_game_loop(UNUSED void *arg) {
+void thread5_game_loop(UNUSED void *arg) { 
     osCreateMesgQueue(&gGfxVblankQueue, &gGfxMesgBuf, 1);
     osCreateMesgQueue(&gGameVblankQueue, &gGameMesgBuf, 1);
     init_controllers();
@@ -1131,6 +1131,8 @@ void thread5_game_loop(UNUSED void *arg) {
             gGamestate = gGamestateNext;
             update_gamestate();
         }
+
+        UpdateRandoCourses();
         profiler_log_thread5_time(THREAD5_START);
         config_gfx_pool();
         read_controllers();

@@ -16,6 +16,7 @@
 #include "staff_ghosts.h"
 #include <sounds.h>
 #include "limited_characters.h"
+#include "rando_courses.h"
 
 /** Externs to be put into headers **/
 extern s16 D_8015F892; // bss unknown
@@ -130,7 +131,7 @@ const s8 D_800F2BAC[] = {
     BOWSER, 
 };
 
-const s16 gCupCourseOrder[5][4] = {
+s16 gCupCourseOrder[5][4] = {
     // mushroom cup
     { COURSE_LUIGI_RACEWAY, COURSE_MOO_MOO_FARM, COURSE_KOOPA_BEACH, COURSE_KALAMARI_DESERT },
     // flower cup
@@ -218,6 +219,7 @@ void update_menus(void) {
                 break;
             case COURSE_SELECT_MENU_FROM_QUIT:
             case COURSE_SELECT_MENU:
+                updateCourseNameTextures();
                 course_select_menu_act(&gControllers[controllerIdx], controllerIdx);
                 break;
             }
@@ -1680,20 +1682,20 @@ void course_select_menu_act(struct Controller *arg0, u16 arg1) {
             if ((buttonAndStickPress & 0x100) != 0) {
                 if (gCupSelection < SPECIAL_CUP) {
                     D_8018EE0A = gCupSelection;
-                    ++gCupSelection;
+                    //++gCupSelection;
                     func_800B44AC();
                     play_sound2(SOUND_MENU_CURSOR_MOVE);
                 }
             }
             if (((buttonAndStickPress & 0x200) != 0) && (gCupSelection > MUSHROOM_CUP)) {
                 D_8018EE0A = gCupSelection;
-                --gCupSelection;
+                //--gCupSelection;
                 func_800B44AC();
                 play_sound2(SOUND_MENU_CURSOR_MOVE);
             }
 
             D_800DC540 = gCupSelection;
-            gCurrentCourseId = gCupCourseOrder[gCupSelection][gCupCourseSelection] & 0x00FF;
+            gCurrentCourseId = gCupCourseOrder[gCupSelection][gCupCourseSelection];
             if ((buttonAndStickPress & 0x4000) != 0) {
                 func_8009E208();
                 play_sound2(SOUND_MENU_GO_BACK);
@@ -1705,7 +1707,7 @@ void course_select_menu_act(struct Controller *arg0, u16 arg1) {
                 } else {
                     D_8018EDEC = 3;
                     play_sound2(SOUND_MENU_SELECT);
-                    gCurrentCourseId = gCupCourseOrder[gCupSelection][CUP_COURSE_ONE] & 0x00FF;
+                    gCurrentCourseId = gCupCourseOrder[gCupSelection][CUP_COURSE_ONE];
                     gMenuTimingCounter = 0;
                 }
                 func_800B44AC();
@@ -1714,17 +1716,17 @@ void course_select_menu_act(struct Controller *arg0, u16 arg1) {
         case 2:
         case 4:
             if (((buttonAndStickPress & 0x400) != 0) && (gCupCourseSelection < CUP_COURSE_FOUR)) {
-                    ++gCupCourseSelection;
+                    //++gCupCourseSelection;
                     func_800B44AC();
                     play_sound2(SOUND_MENU_CURSOR_MOVE);
             }
             if (((buttonAndStickPress & 0x800) != 0) && (gCupCourseSelection > CUP_COURSE_ONE)) {
-                --gCupCourseSelection;
+                //--gCupCourseSelection;
                 func_800B44AC();
                 play_sound2(SOUND_MENU_CURSOR_MOVE);
             }
 
-            gCurrentCourseId = gCupCourseOrder[gCupSelection][gCupCourseSelection] & 0x00FF;
+            gCurrentCourseId = gCupCourseOrder[gCupSelection][gCupCourseSelection];
             if ((buttonAndStickPress & 0x4000) != 0) {
                 if (D_8018EDEC == 2) {
                     D_8018EDEC = 1;

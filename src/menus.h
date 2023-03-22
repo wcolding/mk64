@@ -43,7 +43,7 @@ extern s8 D_800E86D0[16];
 
 extern const s8 D_800F2B60[5][3];
 extern const s32 gGameModeFromNumPlayersAndRowSelection[5][3];
-extern const s16 gCupCourseOrder[5][4];
+extern s16 gCupCourseOrder[5][4];
 
 extern s32 D_8018EDC0;
 extern f32 D_8018EDC4;

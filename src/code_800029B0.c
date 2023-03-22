@@ -105,9 +105,7 @@ void setup_race(void) {
     int i;
 
     gPlayerCountSelection1 = D_8018EDF3;
-    if (gGamestate != RACING) {
-        gIsMirrorMode = 0;
-    }
+    
     if (gIsMirrorMode) {
         gCourseDirection = -1.0f;
     } else {
@@ -117,16 +115,16 @@ void setup_race(void) {
         gCurrentCourseId = gCupCourseOrder[gCupSelection][gCupCourseSelection];
     }
     gActiveScreenMode = gScreenModeSelection;
-    if (gCurrentCourseId != gCurrentlyLoadedCourseId) {
-        D_80150120 = 0;
-        gCurrentlyLoadedCourseId = gCurrentCourseId;
-        gPrevLoadedAddress = D_8015F734;
-        load_course(gCurrentCourseId);
-        func_80295D88();
-        D_8015F730 = gPrevLoadedAddress;
-    } else {
-        gPrevLoadedAddress = D_8015F730;
-    }
+
+    // Always reload course to account for mirroring
+    // We shouldn't have any repeats in the same cup, but we'll do this to be safe
+    D_80150120 = 0;
+    gCurrentlyLoadedCourseId = gCurrentCourseId;
+    gPrevLoadedAddress = D_8015F734;
+    load_course(gCurrentCourseId);
+    func_80295D88();
+    D_8015F730 = gPrevLoadedAddress;
+    
     func_802969F8();
     func_80005310();
     func_8003D080();
