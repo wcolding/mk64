@@ -53,7 +53,7 @@ void UpdateRandoCourses(void)
     for (i = 0; i < 4; i++)
     {
         gCupCourseOrder[0][i] = gRandomizedCups[gCharacterSelections[0]][i].id;
-        RandomizedRaceNameTextures[i].textureData = mappedTitleTextures[gCupCourseOrder[0][i]];
+        RandomizedCourseNameTextures[i].textureData = mappedTitleTextures[gCupCourseOrder[0][i]];
     }
 
     gCupSelection = 0;

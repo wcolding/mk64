@@ -34,7 +34,7 @@ u64* mappedTitleTextures[20] = {
     0                               // 0x13
 };
 
-MkTexture RandomizedRaceNameTextures[5] = {
+MkTexture RandomizedCourseNameTextures[5] = {
     {1, 0, gTextureTitleWarioStadium,     140, 18, 157, 112, 0x0, 0},
     {1, 0, gTextureTitleMooMooFarm,       140, 18, 157, 136, 0x0, 0},
     {1, 0, gTextureTitleKoopaTroopaBeach, 140, 18, 157, 160, 0x0, 0},
@@ -42,10 +42,10 @@ MkTexture RandomizedRaceNameTextures[5] = {
     {0, 0, NULL, 0, 0, 0, 0, 0, 0},
 };
 
-void updateCourseNameTextures(void)
+void UpdateCourseNameTextures(void)
 {
-    D_800E82C8[0x05] = RandomizedRaceNameTextures;
-    D_800E82C8[0x10] = RandomizedRaceNameTextures;
+    D_800E82C8[0x05] = RandomizedCourseNameTextures;
+    D_800E82C8[0x10] = RandomizedCourseNameTextures;
 }
 
 #endif

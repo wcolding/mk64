@@ -219,7 +219,7 @@ void update_menus(void) {
                 break;
             case COURSE_SELECT_MENU_FROM_QUIT:
             case COURSE_SELECT_MENU:
-                updateCourseNameTextures();
+                UpdateCourseNameTextures();
                 course_select_menu_act(&gControllers[controllerIdx], controllerIdx);
                 break;
             }
